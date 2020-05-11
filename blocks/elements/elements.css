@@ -3,15 +3,22 @@
   grid-template-columns: repeat(3, 282px);
   grid-column-gap: 18px;
   grid-row-gap: 20px;
-  width: calc(100% - 398px);
   margin: 0 auto;
   justify-content: center;
   margin-top: 47.25px;
+  list-style: none;
+  padding-left: 0;
 }
 
 @media screen and (max-width: 1279px){
   .elements {
     width: calc(100% - 142px);
+  }
+}
+
+@media screen and (min-width: 1025px){
+  .elements {
+    width: 883px;
   }
 }
 
@@ -21,7 +28,13 @@
   }
 }
 
-@media screen and (max-width: 550px){
+@media screen and (min-width: 376px) and (max-width: 550px){
+  .elements {
+    grid-template-columns: 337px;
+  }
+}
+
+@media screen and (max-width: 375px){
   .elements {
     grid-template-columns: 1fr;
     width: calc(100% - 38px);

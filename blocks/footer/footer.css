@@ -2,20 +2,23 @@
 
 .footer {
   margin: 0 auto;
-  width: calc(100% - 398px);
+  width: 883px;
   margin-top: 66px;
 }
 
-@media screen and (max-width: 1279px){
+@media screen and (max-width: 970px){
   .footer {
-    width: calc(100% - 142px);
+    width: calc(100% - 140px);
   }
 }
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 425px){
   .footer {
     width: calc(100% - 38px);
     margin-top: 48px;
   }
 }
+
+
+
 

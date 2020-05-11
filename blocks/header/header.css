@@ -2,17 +2,17 @@
 
 .header {
   margin: 0 auto;
-  width: calc(100% - 398px);
+  width: 883px;
   border-bottom: 1px solid rgba(84, 84, 84, 0.2);
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 970px){
   .header {
-    width: calc(100% - 142px);
+    width: calc(100% - 140px);
   }
 }
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 425px){
   .header {
     width: calc(100% - 54px);
   }

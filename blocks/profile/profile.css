@@ -5,26 +5,28 @@
 @import url(./__name/profile__name.css);
 @import url(./__profession/profile__profession.css);
 @import url(./__cell/profile__cell.css);
-
 .profile {
   margin: 0 auto;
-  width: calc(100% - 398px);
+  width: 883px;
   display: flex;
   margin-top: 36.25px;
 }
 
-@media screen and (max-width: 1279px){
+@media screen and (max-width: 970px) {
   .profile {
-    width: calc(100% - 142px);
+    width: calc(100% - 140px);
   }
 }
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 700px) {
   .profile {
-    width: calc(100% - 38px);
     flex-direction: column;
     align-items: center;
   }
 }
 
-
+@media screen and (max-width: 425px) {
+  .profile {
+    width: calc(100% - 38px);
+  }
+}
