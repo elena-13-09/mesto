@@ -9,6 +9,8 @@
   border-right: none;
   border-left: none;
   margin-bottom: 29.74px;
+  box-sizing: border-box;
+  padding: 0;
 }
 
 .popup__input:last-child {
