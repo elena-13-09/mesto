@@ -3,4 +3,6 @@ border: none;
 display: flex;
 align-items: center;
 box-sizing: border-box;
+padding: 0;
+flex-direction: column;
 }
