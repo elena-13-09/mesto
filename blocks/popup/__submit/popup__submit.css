@@ -13,6 +13,7 @@
   margin-top: 48px;
   cursor: pointer;
   margin-bottom: 36.51px;
+  min-height: 50.15px;
 }
 
 @media screen and (max-width: 600px){
