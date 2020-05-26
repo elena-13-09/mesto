@@ -25,67 +25,52 @@
         </div>
         <button class="profile__add-button" type="button"></button>
       </section>
-      <section class="elements">
-        <ul class="elements__list">
-          <li class="element">
-            <img class="element__image" src="./images/castle.jpg" alt="Крепость. Иллюстрация">
-            <div class="element__cell">
-              <h3 class="element__title">Карачаевск</h3>
-              <button class="element__like" type="button"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/field.jpg" alt="Поле. Иллюстрация">
-            <div class="element__cell">
-              <h3 class="element__title">Гора Эльбрус</h3>
-              <button class="element__like" type="button"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/mount.jpg" alt="Горы. Иллюстрация">
-            <div class="element__cell">
-              <h3 class="element__title">Домбай</h3>
-              <button class="element__like" type="button"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/field.jpg" alt="Поле. Иллюстрация">
-            <div class="element__cell">
-              <h3 class="element__title">Гора Эльбрус</h3>
-              <button class="element__like" type="button"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/mount.jpg" alt="Горы. Иллюстрация">
-            <div class="element__cell">
-              <h3 class="element__title">Домбай</h3>
-              <button class="element__like" type="button"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/castle.jpg" alt="Крепость. Иллюстрация">
-            <div class="element__cell">
-              <h3 class="element__title">Карачаевск</h3>
-              <button class="element__like" type="button"></button>
-            </div>
-          </li>
-        </ul>
-      </section>
+      <section class="elements"></section>
+
+      <template id="element-template">
+        <div class="element">
+          <img class="element__image">
+          <div class="element__cell">
+            <h3 class="element__title"></h3>
+            <button class="element__like" type="button"></button>
+          </div>
+          <button class="element__trash" type="button"></button>
+        </div>
+      </template>
+
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
-    <section class="popup">
+    <section class="popup popup_profile">
       <form class="popup__container">
-        <button class="popup__close" type="button"></button>
-        <h3 class="popup__title">Редактировать профиль</h3>
+        <button class="popup__close popup__close_profile" type="button"></button>
+        <h3 class="popup__title popup__title_profile">Редактировать профиль</h3>
         <fieldset class="popup__field">
           <input class="popup__input popup__input_name" type="text" value="Жак-Ив Кусто" placeholder="Имя">
           <input class="popup__input popup__input_profession" type="text" value="Исследователь океана"
             placeholder="О себе">
         </fieldset>
-        <button class="popup__submit" type="submit">Сохранить</button>
+        <button class="popup__submit popup__submit_profile" type="submit">Сохранить</button>
       </form>
+    </section>
+    <section class="popup popup_image">
+      <form class="popup__container">
+        <button class="popup__close popup__close_image" type="button"></button>
+        <h3 class="popup__title popup__title_image">Новое место</h3>
+        <fieldset class="popup__field">
+          <input class="popup__input popup__input_name-image" type="text" value="" placeholder="Название">
+          <input class="popup__input popup__input_link-image" type="text" value="" placeholder="Ссылка на картинку">
+        </fieldset>
+        <button class="popup__submit popup__submit_image" type="submit">Создать</button>
+      </form>
+    </section>
+    <section class="popup popup_zoom">
+      <figure class="popup__zoom-container">
+      <button class="popup__close popup__close_zoom" type="button"></button>
+      <img class="popup__zoom-image">
+      <h3 class="popup__zoom-title"></h3>
+      </figure>
     </section>
   </div>
   <script src="script.js"></script>
