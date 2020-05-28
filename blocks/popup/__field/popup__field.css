@@ -1,17 +1,5 @@
 .popup__field {
   border: none;
-  max-width: 358px;
   padding: 0;
 }
 
-@media screen and (max-width: 600px) {
-  .popup__field {
-    margin-left: 50px;
-  }
-}
-
-@media screen and (max-width: 375px) {
-  .popup__field {
-    margin-left: 20px;
-  }
-}
