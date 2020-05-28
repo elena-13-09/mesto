@@ -1,6 +1,6 @@
 .element__like_active {
   background: url(../../../../images/like_active.svg) no-repeat;
-  min-height: 19px ;
+  min-height: 19px;
   width: 23px;
   background-position: center;
   border: none;

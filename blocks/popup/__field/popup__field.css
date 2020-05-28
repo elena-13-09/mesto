@@ -6,12 +6,12 @@
 
 @media screen and (max-width: 600px) {
   .popup__field {
-    margin-left: 36px;
+    margin-left: 50px;
   }
 }
 
 @media screen and (max-width: 375px) {
   .popup__field {
-    margin-left: 7px;
+    margin-left: 20px;
   }
 }
