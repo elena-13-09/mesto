@@ -58,8 +58,6 @@ popupProfile.addEventListener('submit', function (evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileProfession.textContent = inputProfession.value;
-  inputName.value = 'Жак-Ив Кусто';
-  inputProfession.value = 'Исследователь океана';
   togglePopup(popupProfile);
 });
 
