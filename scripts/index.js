@@ -1,21 +1,30 @@
+formObj = {
+  formSelector: '.form__container',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.button__submit',
+  inactiveButtonClass: 'button__submit_inactive',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_active'
+};
+
 const popupProfile = document.querySelector('.popup_profile');
 const popupEditButton = document.querySelector('.profile__edit-button');
-const popupCloseProfile = document.querySelector('.popup__close_profile');
+const buttonCloseProfile = document.querySelector('.button__close_profile');
 const profileName = document.querySelector('.profile__name');
 const profileProfession = document.querySelector('.profile__profession');
-const inputName = document.querySelector('.popup__input_name');
-const inputProfession = document.querySelector('.popup__input_profession');
+const inputName = document.querySelector('.form__input_name');
+const inputProfession = document.querySelector('.form__input_profession');
 
 const popupImage = document.querySelector('.popup_image');
 const popupAddButton = document.querySelector('.profile__add-button');
-const popupCloseImage = document.querySelector('.popup__close_image');
-const inputImageName = document.querySelector('.popup__input_name-image');
-const inputImageLink = document.querySelector('.popup__input_link-image');
+const buttonCloseImage = document.querySelector('.button__close_image');
+const inputImageName = document.querySelector('.form__input_name-image');
+const inputImageLink = document.querySelector('.form__input_link-image');
 
 const popupZoom = document.querySelector('.popup_zoom');
 const popupZoomImage = document.querySelector('.popup__zoom-image');
 const popupZoomTitle = document.querySelector('.popup__zoom-title');
-const popupCloseZoom = document.querySelector('.popup__close_zoom');
+const buttonCloseZoom = document.querySelector('.button__close_zoom');
 
 const elementTemplate = document.querySelector('#element-template').content;
 const elements = document.querySelector('.elements');
@@ -48,9 +57,41 @@ const initialCards = [
   }
 ];
 
+const submitButtonImage = document.querySelector('.button__submit_image');
+const formSelectorImage = document.querySelector('.form__container_image');
+const formInput = Array.from(formSelectorImage.querySelectorAll('.form__input'));
+
+//сбрасывание ошибки (красной линии)
+function removeInput() {
+  formInput.forEach((element) => {
+    if (element.classList.contains('form__input_type_error')) {
+      element.classList.remove('form__input_type_error');
+    }
+  });
+}
+
+//закрытие попапа кликом на оверлей
+function closePopupOverlay(evt) {
+  if (evt.target.classList.contains('popup')) {
+    evt.target.classList.remove('popup_opened');
+  }
+}
+
+//закрытие попапа кнопкой Esc
+function closeEsc(evt, popupElement) {
+  if (evt.key === 'Escape') {
+    popupElement.classList.remove('popup_opened');
+  }
+}
+
 //открытие и закрытие попапов
 function togglePopup(popupElement) {
   popupElement.classList.toggle('popup_opened');
+  if (popupElement.classList.contains('popup_opened')) {
+    document.addEventListener('keydown', (element) => closeEsc(element, popupElement));
+  } else {
+    document.removeEventListener('keydown', (element) => closeEsc(element, popupElement));
+  }
 }
 
 //сохренение профиля
@@ -71,7 +112,12 @@ popupImage.addEventListener('submit', function (evt) {
   inputImageName.value = '';
   inputImageLink.value = '';
   displayCards(cards);
+  //сброс кнопки сабмит
+  toggleButtonState(formInput, submitButtonImage, formObj);
+  //сброс красной линнии
+  removeInput(popupImage);
   togglePopup(popupImage);
+
 });
 
 //функция для кнопки лайк
@@ -112,11 +158,14 @@ function displayCards(item) {
 initialCards.forEach(displayCards);
 
 popupEditButton.addEventListener('click', () => togglePopup(popupProfile));
-popupCloseProfile.addEventListener('click', () => togglePopup(popupProfile));
+buttonCloseProfile.addEventListener('click', () => togglePopup(popupProfile));
 
 popupAddButton.addEventListener('click', () => togglePopup(popupImage));
-popupCloseImage.addEventListener('click', () => togglePopup(popupImage));
+buttonCloseImage.addEventListener('click', () => togglePopup(popupImage));
 
-popupCloseZoom.addEventListener('click', () => togglePopup(popupZoom));
+buttonCloseZoom.addEventListener('click', () => togglePopup(popupZoom));
 
+popupProfile.addEventListener('click', closePopupOverlay);
+popupImage.addEventListener('click', closePopupOverlay);
+popupZoom.addEventListener('click', closePopupOverlay);
 
