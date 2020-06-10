@@ -10,6 +10,9 @@
   padding-top: 45px;
   padding-bottom: 60px;
   font-family: 'inter', Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 @media screen and (max-width: 425px) {

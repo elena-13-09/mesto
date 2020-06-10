@@ -27,17 +27,6 @@
         <button class="profile__add-button" type="button"></button>
       </section>
       <section class="elements"></section>
-
-      <template id="element-template">
-        <div class="element">
-          <img class="element__image">
-          <div class="element__cell">
-            <h3 class="element__title"></h3>
-            <button class="element__like" type="button"></button>
-          </div>
-          <button class="element__trash" type="button"></button>
-        </div>
-      </template>
     </main>
 
     <footer class="footer">
@@ -45,30 +34,30 @@
     </footer>
 
     <section class="popup popup_profile">
-      <form class="form__container" novalidate>
+      <form class="form__container form__container_profile" name="form-profile" novalidate>
         <button class="button__close button__close_profile" type="button"></button>
         <h3 class="form__title form__title_profile">Редактировать профиль</h3>
         <fieldset class="form__field">
-          <input class="form__input form__input_name" id="name-input" type="text" value="Жак-Ив Кусто" placeholder="Имя"
+          <input class="form__input form__input_name" name="name" id="name-input" type="text" value="Жак-Ив Кусто" placeholder="Имя"
             minlength="2" maxlength="40" pattern="^[A-Za-zА-ЯЁа-яё\s-]+$" required>
           <span class="form__input-error" id="name-input-error"></span>
-          <input class="form__input form__input_profession" id="profession-input" type="text"
+          <input class="form__input form__input_profession" name="profession" id="profession-input" type="text"
             value="Исследователь океана" placeholder="О себе" minlength="2" maxlength="200" required>
           <span class="form__input-error" id="profession-input-error"></span>
         </fieldset>
-        <button class="button__submit" type="submit">Сохранить</button>
+        <button class="button__submit button__submit_profile" type="submit">Сохранить</button>
       </form>
     </section>
 
     <section class="popup popup_image">
-      <form class="form__container form__container_image" novalidate>
+      <form class="form__container form__container_image" name="form-image" novalidate>
         <button class="button__close button__close_image" type="button"></button>
         <h3 class="form__title form__title_image">Новое место</h3>
         <fieldset class="form__field">
-          <input class="form__input form__input_name-image" id="image-input" type="text" value="" placeholder="Название"
+          <input class="form__input form__input_name-image" name="image" id="image-input" type="text" value="" placeholder="Название"
             minlength="1" maxlength="30" pattern="^[A-Za-zА-ЯЁа-яё\s-]+$" required>
           <span class="form__input-error" id="image-input-error"></span>
-          <input class="form__input form__input_link-image" id="link-input" type="url" value=""
+          <input class="form__input form__input_link-image" name="link-image" id="link-input" type="url" value=""
             placeholder="Ссылка на картинку" required>
           <span class="form__input-error" id="link-input-error"></span>
         </fieldset>
@@ -83,6 +72,17 @@
         <h3 class="popup__zoom-title"></h3>
       </figure>
     </section>
+
+    <template id="element-template">
+      <div class="element">
+        <img class="element__image">
+        <div class="element__cell">
+          <h3 class="element__title"></h3>
+          <button class="element__like" type="button"></button>
+        </div>
+        <button class="element__trash" type="button"></button>
+      </div>
+    </template>
   </div>
   <script src="./scripts/index.js"></script>
   <script src="./scripts/validate.js"></script>

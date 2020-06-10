@@ -1,9 +1,9 @@
 @import url(./__copyright/footer__copyright.css);
 
 .footer {
-  margin: 0 auto;
   width: 883px;
   margin-top: 66px;
+  margin: auto auto 0;
 }
 
 @media screen and (max-width: 970px){

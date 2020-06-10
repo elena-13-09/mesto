@@ -1,3 +1,12 @@
+formObj = {
+  formSelector: '.form__container',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.button__submit',
+  inactiveButtonClass: 'button__submit_inactive',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_active'
+};
+
 //добавление класса с ошибкой
 const showInputError = (formElement, inputElement, errorMessage, obj) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
@@ -60,6 +69,9 @@ const setEventListeners = (formElement, obj) => {
 const enableValidation = (obj) => {
   const formList = Array.from(document.querySelectorAll(obj.formSelector));
   formList.forEach((formElement) => {
+    formElement.addEventListener('submit', function (evt) {
+      evt.preventDefault();
+    });
     setEventListeners(formElement, obj);
   });
 };

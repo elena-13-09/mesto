@@ -1,23 +1,18 @@
-formObj = {
-  formSelector: '.form__container',
-  inputSelector: '.form__input',
-  submitButtonSelector: '.button__submit',
-  inactiveButtonClass: 'button__submit_inactive',
-  inputErrorClass: 'form__input_type_error',
-  errorClass: 'form__input-error_active'
-};
-
 const popupProfile = document.querySelector('.popup_profile');
+const formSelectorProfile = document.querySelector('.form__container_profile');
 const popupEditButton = document.querySelector('.profile__edit-button');
 const buttonCloseProfile = document.querySelector('.button__close_profile');
+const submitButtonProfile = document.querySelector('.button__submit_profile');
 const profileName = document.querySelector('.profile__name');
 const profileProfession = document.querySelector('.profile__profession');
 const inputName = document.querySelector('.form__input_name');
 const inputProfession = document.querySelector('.form__input_profession');
 
 const popupImage = document.querySelector('.popup_image');
+const formSelectorImage = document.querySelector('.form__container_image');
 const popupAddButton = document.querySelector('.profile__add-button');
 const buttonCloseImage = document.querySelector('.button__close_image');
+const submitButtonImage = document.querySelector('.button__submit_image');
 const inputImageName = document.querySelector('.form__input_name-image');
 const inputImageLink = document.querySelector('.form__input_link-image');
 
@@ -28,6 +23,8 @@ const buttonCloseZoom = document.querySelector('.button__close_zoom');
 
 const elementTemplate = document.querySelector('#element-template').content;
 const elements = document.querySelector('.elements');
+
+const formInput = Array.from(document.querySelectorAll('.form__input'));
 
 const initialCards = [
 
@@ -57,16 +54,11 @@ const initialCards = [
   }
 ];
 
-const submitButtonImage = document.querySelector('.button__submit_image');
-const formSelectorImage = document.querySelector('.form__container_image');
-const formInput = Array.from(formSelectorImage.querySelectorAll('.form__input'));
-
-//сбрасывание ошибки (красной линии)
-function removeInput() {
-  formInput.forEach((element) => {
-    if (element.classList.contains('form__input_type_error')) {
-      element.classList.remove('form__input_type_error');
-    }
+//сбрасывание ошибок валидации
+function removeInput(obj) {
+  const inputList = Array.from(obj.querySelectorAll(formObj.inputSelector));
+  inputList.forEach((formElement) => {
+    hideInputError(obj, formElement, formObj);
   });
 }
 
@@ -95,15 +87,18 @@ function togglePopup(popupElement) {
 }
 
 //сохренение профиля
-popupProfile.addEventListener('submit', function (evt) {
+formSelectorProfile.addEventListener('submit', function (evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileProfession.textContent = inputProfession.value;
+  //сброс кнопки сабмит
+  toggleButtonState(formInput, submitButtonProfile, formObj);
+  removeInput(formSelectorProfile);
   togglePopup(popupProfile);
 });
 
 //сохранение карточки
-popupImage.addEventListener('submit', function (evt) {
+formSelectorImage.addEventListener('submit', function (evt) {
   evt.preventDefault();
   const cards = {
     name: inputImageName.value,
@@ -114,8 +109,7 @@ popupImage.addEventListener('submit', function (evt) {
   displayCards(cards);
   //сброс кнопки сабмит
   toggleButtonState(formInput, submitButtonImage, formObj);
-  //сброс красной линнии
-  removeInput(popupImage);
+  removeInput(formSelectorImage);
   togglePopup(popupImage);
 
 });
@@ -165,7 +159,7 @@ buttonCloseImage.addEventListener('click', () => togglePopup(popupImage));
 
 buttonCloseZoom.addEventListener('click', () => togglePopup(popupZoom));
 
-popupProfile.addEventListener('click', closePopupOverlay);
-popupImage.addEventListener('click', closePopupOverlay);
-popupZoom.addEventListener('click', closePopupOverlay);
+popupProfile.addEventListener('mousedown', closePopupOverlay);
+popupImage.addEventListener('mousedown', closePopupOverlay);
+popupZoom.addEventListener('mousedown', closePopupOverlay);
 
