@@ -55,7 +55,7 @@ const initialCards = [
 ];
 
 //сбрасывание ошибок валидации
-function removeInput(obj) {
+function removeInput(obj, formObj) {
   const inputList = Array.from(obj.querySelectorAll(formObj.inputSelector));
   inputList.forEach((formElement) => {
     hideInputError(obj, formElement, formObj);
@@ -91,9 +91,6 @@ formSelectorProfile.addEventListener('submit', function (evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileProfession.textContent = inputProfession.value;
-  //сброс кнопки сабмит
-  toggleButtonState(formInput, submitButtonProfile, formObj);
-  removeInput(formSelectorProfile);
   togglePopup(popupProfile);
 });
 
@@ -104,14 +101,8 @@ formSelectorImage.addEventListener('submit', function (evt) {
     name: inputImageName.value,
     link: inputImageLink.value
   };
-  inputImageName.value = '';
-  inputImageLink.value = '';
   displayCards(cards);
-  //сброс кнопки сабмит
-  toggleButtonState(formInput, submitButtonImage, formObj);
-  removeInput(formSelectorImage);
   togglePopup(popupImage);
-
 });
 
 //функция для кнопки лайк
@@ -151,14 +142,37 @@ function displayCards(item) {
 
 initialCards.forEach(displayCards);
 
-popupEditButton.addEventListener('click', () => togglePopup(popupProfile));
+//слушатели формы профиля
+popupEditButton.addEventListener('click', () => {
+  //что бы оставалось текущие значения имени и профессии в инпутах
+  inputName.value = profileName.textContent;
+  inputProfession.value = profileProfession.textContent;
+  //сбрасывание ошибок валидации
+  removeInput(formSelectorProfile, formObj);
+  //сброс кнопки сабмит
+  toggleButtonState(formInput, submitButtonProfile, formObj);
+  togglePopup(popupProfile);
+});
+
 buttonCloseProfile.addEventListener('click', () => togglePopup(popupProfile));
 
-popupAddButton.addEventListener('click', () => togglePopup(popupImage));
+//слушатели формы добавления карточек
+popupAddButton.addEventListener('click', () => {
+  //очистка импутов
+  formSelectorImage.reset();
+  //сбрасывание ошибок валидации
+  removeInput(formSelectorImage, formObj);
+  //сброс кнопки сабмит
+  toggleButtonState(formInput, submitButtonImage, formObj);
+  togglePopup(popupImage);
+});
+
 buttonCloseImage.addEventListener('click', () => togglePopup(popupImage));
 
+//слушатели просмотра карточки
 buttonCloseZoom.addEventListener('click', () => togglePopup(popupZoom));
 
+//слушатели закрытия попапов по клику на оверлей
 popupProfile.addEventListener('mousedown', closePopupOverlay);
 popupImage.addEventListener('mousedown', closePopupOverlay);
 popupZoom.addEventListener('mousedown', closePopupOverlay);
