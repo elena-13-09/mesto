@@ -1,3 +1,6 @@
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+
 const popupProfile = document.querySelector('.popup_profile');
 const formSelectorProfile = document.querySelector('.form__container_profile');
 const popupEditButton = document.querySelector('.profile__edit-button');
@@ -16,15 +19,10 @@ const submitButtonImage = document.querySelector('.button__submit_image');
 const inputImageName = document.querySelector('.form__input_name-image');
 const inputImageLink = document.querySelector('.form__input_link-image');
 
-const popupZoom = document.querySelector('.popup_zoom');
-const popupZoomImage = document.querySelector('.popup__zoom-image');
-const popupZoomTitle = document.querySelector('.popup__zoom-title');
+export const popupZoom = document.querySelector('.popup_zoom');
+export const popupZoomImage = document.querySelector('.popup__zoom-image');
+export const popupZoomTitle = document.querySelector('.popup__zoom-title');
 const buttonCloseZoom = document.querySelector('.button__close_zoom');
-
-const elementTemplate = document.querySelector('#element-template').content;
-const elements = document.querySelector('.elements');
-
-const formInput = Array.from(document.querySelectorAll('.form__input'));
 
 const initialCards = [
 
@@ -54,12 +52,32 @@ const initialCards = [
   }
 ];
 
+const formObj = {
+  formSelector: '.form__container',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.button__submit',
+  inactiveButtonClass: 'button__submit_inactive',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_active'
+}
+
+//включение валидации форм
+const formProfileValidator = new FormValidator(formObj, formSelectorProfile);
+formProfileValidator.enableValidation();
+const formImageValidator = new FormValidator(formObj, formSelectorImage);
+formImageValidator.enableValidation();
+
 //сбрасывание ошибок валидации
-function removeInput(obj, formObj) {
-  const inputList = Array.from(obj.querySelectorAll(formObj.inputSelector));
-  inputList.forEach((formElement) => {
-    hideInputError(obj, formElement, formObj);
-  });
+function removeInput() {
+  const inputList = Array.from(document.querySelectorAll(formObj.inputSelector));
+  inputList.forEach((input) => {
+    input.classList.remove(formObj.inputErrorClass);
+  })
+  const errorElement = Array.from(document.querySelectorAll('.form__input-error'));
+  errorElement.forEach((error) => {
+    error.classList.remove(formObj.errorClass);
+    error.textContent = '';
+  })
 }
 
 //закрытие попапа кликом на оверлей
@@ -77,7 +95,7 @@ function closeEsc(evt, popupElement) {
 }
 
 //открытие и закрытие попапов
-function togglePopup(popupElement) {
+export function togglePopup(popupElement) {
   popupElement.classList.toggle('popup_opened');
   if (popupElement.classList.contains('popup_opened')) {
     document.addEventListener('keydown', (element) => closeEsc(element, popupElement));
@@ -92,7 +110,7 @@ formSelectorProfile.addEventListener('submit', function (evt) {
   profileName.textContent = inputName.value;
   profileProfession.textContent = inputProfession.value;
   togglePopup(popupProfile);
-});
+})
 
 //сохранение карточки
 formSelectorImage.addEventListener('submit', function (evt) {
@@ -101,43 +119,16 @@ formSelectorImage.addEventListener('submit', function (evt) {
     name: inputImageName.value,
     link: inputImageLink.value
   };
-  displayCards(cards);
+  displayCards(cards)
   togglePopup(popupImage);
-});
-
-//функция для кнопки лайк
-function handleLike(evt) {
-  evt.target.classList.toggle('element__like_active');
-}
-
-//функция для удаления карточки
-function trashCards(evt) {
-  evt.target.closest('.element').remove();
-}
-
-// Создание карточек
-function addCards(name, link) {
-  const elementCards = elementTemplate.cloneNode(true);
-  const elementImage = elementCards.querySelector('.element__image');
-  elementImage.src = link;
-  elementCards.querySelector('.element__title').textContent = name;
-  //кнопка лайк
-  elementCards.querySelector('.element__like').addEventListener('click', handleLike);
-  //удаление карточки
-  elementCards.querySelector('.element__trash').addEventListener('click', trashCards);
-  //увеличение карточки
-  elementImage.addEventListener('click', function () {
-    popupZoomImage.src = link;
-    popupZoomTitle.textContent = name;
-    togglePopup(popupZoom);
-  });
-
-  return elementCards;
-}
+})
 
 //отображение карточек на странице
 function displayCards(item) {
-  elements.prepend(addCards(item.name, item.link));
+  const cards = new Card(item, '#element-template');
+  const cardElement = cards.generateCard();
+  const elements = document.querySelector('.elements');
+  elements.prepend(cardElement);
 }
 
 initialCards.forEach(displayCards);
@@ -148,11 +139,11 @@ popupEditButton.addEventListener('click', () => {
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
   //сбрасывание ошибок валидации
-  removeInput(formSelectorProfile, formObj);
+  removeInput(formSelectorProfile);
   //сброс кнопки сабмит
-  toggleButtonState(formInput, submitButtonProfile, formObj);
+  submitButtonProfile.classList.add(formObj.inactiveButtonClass);
   togglePopup(popupProfile);
-});
+})
 
 buttonCloseProfile.addEventListener('click', () => togglePopup(popupProfile));
 
@@ -161,11 +152,11 @@ popupAddButton.addEventListener('click', () => {
   //очистка импутов
   formSelectorImage.reset();
   //сбрасывание ошибок валидации
-  removeInput(formSelectorImage, formObj);
+  removeInput(formSelectorImage);
   //сброс кнопки сабмит
-  toggleButtonState(formInput, submitButtonImage, formObj);
+  submitButtonImage.classList.add(formObj.inactiveButtonClass);
   togglePopup(popupImage);
-});
+})
 
 buttonCloseImage.addEventListener('click', () => togglePopup(popupImage));
 
@@ -176,4 +167,6 @@ buttonCloseZoom.addEventListener('click', () => togglePopup(popupZoom));
 popupProfile.addEventListener('mousedown', closePopupOverlay);
 popupImage.addEventListener('mousedown', closePopupOverlay);
 popupZoom.addEventListener('mousedown', closePopupOverlay);
+
+
 
