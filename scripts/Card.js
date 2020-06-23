@@ -3,6 +3,7 @@ import { togglePopup, popupZoomImage, popupZoomTitle, popupZoom } from './index.
 export default class Card {
   constructor(item, cardSelector) {
     this._link = item.link;
+    this._alt = item.alt;
     this._name = item.name;
     this._cardSelector = cardSelector;
   }
@@ -19,6 +20,7 @@ export default class Card {
   //функция для просмотра карточек
   _zoomImage() {
     popupZoomImage.src = this._link;
+    popupZoomImage.alt = this._alt;
     popupZoomTitle.textContent = this._name;
     togglePopup(popupZoom);
   }
@@ -57,6 +59,7 @@ export default class Card {
     this._setEventListeners();
     const elementImage = this._element.querySelector('.element__image');
     elementImage.src = this._link;
+    elementImage.alt = this._alt;
     this._element.querySelector('.element__title').textContent = this._name;
     return this._element;
   }

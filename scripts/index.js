@@ -24,31 +24,39 @@ export const popupZoomImage = document.querySelector('.popup__zoom-image');
 export const popupZoomTitle = document.querySelector('.popup__zoom-title');
 const buttonCloseZoom = document.querySelector('.button__close_zoom');
 
+const elements = document.querySelector('.elements');
+
 const initialCards = [
 
   {
     name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
+    alt: 'Архыз'
   },
   {
     name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
+    alt: 'Челябинская область'
   },
   {
     name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
+    alt: 'Иваново'
   },
   {
     name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
+    alt: 'Камчатка'
   },
   {
     name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
+    alt: 'Холмогорский район'
   },
   {
     name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
+    alt: 'Байкал'
   }
 ];
 
@@ -66,19 +74,6 @@ const formProfileValidator = new FormValidator(formObj, formSelectorProfile);
 formProfileValidator.enableValidation();
 const formImageValidator = new FormValidator(formObj, formSelectorImage);
 formImageValidator.enableValidation();
-
-//сбрасывание ошибок валидации
-function removeInput() {
-  const inputList = Array.from(document.querySelectorAll(formObj.inputSelector));
-  inputList.forEach((input) => {
-    input.classList.remove(formObj.inputErrorClass);
-  })
-  const errorElement = Array.from(document.querySelectorAll('.form__input-error'));
-  errorElement.forEach((error) => {
-    error.classList.remove(formObj.errorClass);
-    error.textContent = '';
-  })
-}
 
 //закрытие попапа кликом на оверлей
 function closePopupOverlay(evt) {
@@ -127,7 +122,6 @@ formSelectorImage.addEventListener('submit', function (evt) {
 function displayCards(item) {
   const cards = new Card(item, '#element-template');
   const cardElement = cards.generateCard();
-  const elements = document.querySelector('.elements');
   elements.prepend(cardElement);
 }
 
@@ -139,9 +133,10 @@ popupEditButton.addEventListener('click', () => {
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
   //сбрасывание ошибок валидации
-  removeInput(formSelectorProfile);
+  formProfileValidator.removeInput();
   //сброс кнопки сабмит
   submitButtonProfile.classList.add(formObj.inactiveButtonClass);
+  submitButtonProfile.disabled = true;
   togglePopup(popupProfile);
 })
 
@@ -152,9 +147,10 @@ popupAddButton.addEventListener('click', () => {
   //очистка импутов
   formSelectorImage.reset();
   //сбрасывание ошибок валидации
-  removeInput(formSelectorImage);
+  formImageValidator.removeInput();
   //сброс кнопки сабмит
   submitButtonImage.classList.add(formObj.inactiveButtonClass);
+  submitButtonImage.disabled = true;
   togglePopup(popupImage);
 })
 
