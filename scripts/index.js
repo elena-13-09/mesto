@@ -5,7 +5,6 @@ const popupProfile = document.querySelector('.popup_profile');
 const formSelectorProfile = document.querySelector('.form__container_profile');
 const popupEditButton = document.querySelector('.profile__edit-button');
 const buttonCloseProfile = document.querySelector('.button__close_profile');
-const submitButtonProfile = document.querySelector('.button__submit_profile');
 const profileName = document.querySelector('.profile__name');
 const profileProfession = document.querySelector('.profile__profession');
 const inputName = document.querySelector('.form__input_name');
@@ -134,9 +133,6 @@ popupEditButton.addEventListener('click', () => {
   inputProfession.value = profileProfession.textContent;
   //сбрасывание ошибок валидации
   formProfileValidator.removeInput();
-  //сброс кнопки сабмит
-  submitButtonProfile.classList.add(formObj.inactiveButtonClass);
-  submitButtonProfile.disabled = true;
   togglePopup(popupProfile);
 })
 
@@ -149,8 +145,7 @@ popupAddButton.addEventListener('click', () => {
   //сбрасывание ошибок валидации
   formImageValidator.removeInput();
   //сброс кнопки сабмит
-  submitButtonImage.classList.add(formObj.inactiveButtonClass);
-  submitButtonImage.disabled = true;
+  formImageValidator.inactiveButtonAdd(submitButtonImage);
   togglePopup(popupImage);
 })
 

@@ -41,11 +41,16 @@ export default class FormValidator {
     })
   }
 
-  //активация кнопки
+  //функция неактивной кнопки сабмит
+  inactiveButtonAdd(buttonElement) {
+    buttonElement.classList.add(this._inactiveButtonClass);
+    buttonElement.disabled = true;
+  }
+
+  //активация кнопки сабмит
   _toggleButtonState(inputList, buttonElement) {
     if (this._hasInvalidInput(inputList)) {
-      buttonElement.classList.add(this._inactiveButtonClass);
-      buttonElement.disabled = true;
+      this.inactiveButtonAdd(buttonElement);
     } else {
       buttonElement.classList.remove(this._inactiveButtonClass);
       buttonElement.disabled = false;
