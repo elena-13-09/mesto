@@ -41,7 +41,7 @@ export default class FormValidator {
     })
   }
 
-  //функция неактивной кнопки сабмит
+  //добавление класса "неактивной" кнопки сабмит
   inactiveButtonAdd(buttonElement) {
     buttonElement.classList.add(this._inactiveButtonClass);
     buttonElement.disabled = true;
