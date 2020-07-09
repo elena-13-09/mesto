@@ -1,11 +1,12 @@
 {
   "name": "mesto",
   "version": "1.0.0",
-  "description": "* [Ссылка на проект](https://elena-13-09.github.io/mesto/index.html)",
+  "description": "Учебный проект, выполненный на курсе Вэб-разработчик от Яндекс.Практикум",
   "main": "index.js",
   "scripts": {
     "build": "rm -rf dist && webpack --env.mode=production",
-    "dev": "webpack-dev-server --open --watch"
+    "dev": "webpack-dev-server --open --watch",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
