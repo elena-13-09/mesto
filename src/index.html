@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./page/index.css">
   <title>Место</title>
 </head>
 
@@ -54,10 +53,10 @@
         <button class="button__close button__close_image" type="button"></button>
         <h3 class="form__title form__title_image">Новое место</h3>
         <fieldset class="form__field">
-          <input class="form__input form__input_name-image" name="image" id="image-input" type="text" value=""
+          <input class="form__input form__input_name-image" name="name" id="image-input" type="text" value=""
             placeholder="Название" minlength="1" maxlength="30" pattern="^[A-Za-zА-ЯЁа-яё\s-]+$" required>
           <span class="form__input-error" id="image-input-error"></span>
-          <input class="form__input form__input_link-image" name="link-image" id="link-input" type="url" value=""
+          <input class="form__input form__input_link-image" name="link" id="link-input" type="url" value=""
             placeholder="Ссылка на картинку" required>
           <span class="form__input-error" id="link-input-error"></span>
         </fieldset>
@@ -84,7 +83,6 @@
       </div>
     </template>
   </div>
-  <script type="module" src="./scripts/index.js"></script>
 </body>
 
 </html>

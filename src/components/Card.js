@@ -1,11 +1,10 @@
-import { togglePopup, popupZoomImage, popupZoomTitle, popupZoom } from './index.js';
-
 export default class Card {
-  constructor(item, cardSelector) {
-    this._link = item.link;
-    this._alt = item.alt;
-    this._name = item.name;
+  constructor(cardSelector, { data, handleCardClick }) {
+    this._name = data.name;
+    this._link = data.link;
+    this._alt = data.alt;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -15,14 +14,6 @@ export default class Card {
       .querySelector('.element')
       .cloneNode(true);
     this._element = cardElement;
-  }
-
-  //функция для просмотра карточек
-  _zoomImage() {
-    popupZoomImage.src = this._link;
-    popupZoomImage.alt = this._alt;
-    popupZoomTitle.textContent = this._name;
-    togglePopup(popupZoom);
   }
 
   //функция для кнопки лайк
@@ -40,7 +31,7 @@ export default class Card {
 
     //просмотр карточек
     this._element.querySelector('.element__image').addEventListener('click', () => {
-      this._zoomImage();
+      this._handleCardClick();
     })
 
     //кнопка лайк
