@@ -78,8 +78,8 @@ export default class FormValidator {
     inputList.forEach((input) => {
       input.classList.remove(this._inputErrorClass);
     })
-    const errorElement = Array.from(document.querySelectorAll('.form__input-error'));
-    errorElement.forEach((error) => {
+    const errorList = Array.from(document.querySelectorAll('.form__input-error'));
+    errorList.forEach((error) => {
       error.classList.remove(this._errorClass);
       error.textContent = '';
     })

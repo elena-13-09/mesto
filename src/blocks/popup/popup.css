@@ -1,7 +1,6 @@
 @import url('./__zoom-container/popup__zoom-container.css');
 @import url('./__zoom-image/popup__zoom-image.css');
 @import url('./__zoom-title/popup__zoom-title.css');
-@import url('./_zoom/popup_zoom.css');
 
 .popup {
   background-color: rgba(0, 0, 0, 0.5);

@@ -1,8 +1,8 @@
 export default class Popup {
   constructor(popupSelector) {
-    this._popupElement = document.querySelector(popupSelector);
+    this._popupSelector = document.querySelector(popupSelector);
     //закрытие попопов нажатием на кнопку
-    this._buttonClose = this._popupElement.querySelector('.button__close');
+    this._buttonClose = this._popupSelector.querySelector('.button__close');
     //закрытие попапа кнопкой Esc
     this._handleEscClose = (evt) => {
       if (evt.key === 'Escape') {
@@ -15,24 +15,25 @@ export default class Popup {
         this.close();
       }
     }
-    this.setEventListeners();
   }
 
   //открытие попапа
   open() {
-    this._popupElement.classList.add('popup_opened');
+    this._popupSelector.classList.add('popup_opened');
+    document.addEventListener('keydown', this._handleEscClose);
+    document.addEventListener('mousedown', this._handleOverlayClose);
   }
 
   //закрытие попапа
   close() {
-    this._popupElement.classList.remove('popup_opened');
+    this._popupSelector.classList.remove('popup_opened');
+    document.removeEventListener('keydown', this._handleEscClose);
+    document.removeEventListener('mousedown', this._handleOverlayClose);
   }
 
   //слушатели закрытия попапов
   setEventListeners() {
     this._buttonClose.addEventListener('click', () => this.close());
-    document.addEventListener('keydown', this._handleEscClose);
-    this._popupElement.addEventListener('mousedown', this._handleOverlayClose);
   }
 }
 

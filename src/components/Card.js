@@ -1,8 +1,7 @@
 export default class Card {
-  constructor(cardSelector, { data, handleCardClick }) {
+  constructor(cardSelector, { data, handleCardClick}) {
     this._name = data.name;
     this._link = data.link;
-    this._alt = data.alt;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -24,6 +23,7 @@ export default class Card {
   //функция для удаления карточки
   _trashCard() {
     this._element.remove();
+    this._element = null;
   }
 
   // установка слушателей
@@ -31,7 +31,7 @@ export default class Card {
 
     //просмотр карточек
     this._element.querySelector('.element__image').addEventListener('click', () => {
-      this._handleCardClick();
+      this._handleCardClick(this._name, this._link);
     })
 
     //кнопка лайк
@@ -50,7 +50,7 @@ export default class Card {
     this._setEventListeners();
     const elementImage = this._element.querySelector('.element__image');
     elementImage.src = this._link;
-    elementImage.alt = this._alt;
+    elementImage.alt = this._name;
     this._element.querySelector('.element__title').textContent = this._name;
     return this._element;
   }

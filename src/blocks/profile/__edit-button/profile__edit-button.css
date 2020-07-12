@@ -4,13 +4,11 @@
   height: 24px;
   border: 1px solid #FFFFFF;
   border-radius: 2px;
-  background:  #000000;
   background: url(../../../images/button-edit.svg) no-repeat;
   background-position: center;
   cursor: pointer;
   padding: 0;
   margin-bottom: 10px;
-  padding: 0;
 }
 
 .profile__edit-button:hover {

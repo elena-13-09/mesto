@@ -10,7 +10,7 @@ export default class Section {
   }
   //отрисовка карточек на странице
   renderItems() {
-    this._renderedItems.forEach(item => {
+    this._renderedItems.forEach((item) => {
       //отрисовка  каждой отдельной карточки
       this._renderer(item);
     });

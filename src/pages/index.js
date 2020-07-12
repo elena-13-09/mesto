@@ -20,33 +20,27 @@ const initialCards = [
 
   {
     name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-    alt: 'Архыз'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
   },
   {
     name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-    alt: 'Челябинская область'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
   },
   {
     name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-    alt: 'Иваново'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
   },
   {
     name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-    alt: 'Камчатка'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
   },
   {
     name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-    alt: 'Холмогорский район'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
   },
   {
     name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-    alt: 'Байкал'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
 
@@ -67,26 +61,28 @@ formImageValidator.enableValidation();
 
 const popupWithImage = new PopupWithImage('.popup_zoom');
 
-//функция отрисовки карточек на странице, с открытием попапа просмотра карточек
-function displayCards(item) {
-const card = new Card('#element-template', {
-  data: item, handleCardClick: () => {
-    popupWithImage.open(item)
-  }
-})
-const cardElement = card.generateCard();
-CardList.addItem(cardElement);
-}
-
 //отрисовка карточек на странице
-const CardList = new Section({
+const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
     displayCards(item);
   }
 }, '.elements');
 
-CardList.renderItems();
+cardList.renderItems();
+
+
+//функция отрисовки карточек на странице, с открытием попапа просмотра карточек
+function displayCards(item) {
+  const card = new Card('#element-template', {
+    data: item,
+    handleCardClick: (name, link) => {
+      popupWithImage.open(name, link);
+    }
+  })
+  const cardElement = card.generateCard();
+  cardList.addItem(cardElement);
+}
 
 //добавление новых карточек на страницу
 const formImage = new PopupWithForm({
@@ -95,6 +91,7 @@ const formImage = new PopupWithForm({
     displayCards(item);
   }
 });
+formImage.setEventListeners();
 
 //редактирование профиля
 const userInfo = new UserInfo('.profile__name', '.profile__profession');
@@ -104,12 +101,11 @@ const formProfile = new PopupWithForm({
   formSubmit: (data) => {
     userInfo.setUserInfo(data);
   }
-})
+});
+formProfile.setEventListeners();
 
 //слушатели формы добавления карточек
 popupAddButton.addEventListener('click', () => {
-  //очистка импутов
-  //formSelectorImage.reset();
   //сбрасывание ошибок валидации
   formImageValidator.removeInput();
   //сброс кнопки сабмит

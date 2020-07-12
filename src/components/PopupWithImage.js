@@ -1,20 +1,15 @@
 import Popup from './Popup.js';
 
 export default class PopupWithImage extends Popup {
- constructor(popupSelector) {
-    super(popupSelector)
-  }
-
-  open(data) {
+  open(name, link) {
     super.open();
+    super.setEventListeners();
     const popupZoomImage = document.querySelector('.popup__zoom-image');
-    popupZoomImage.src = data.link;
-    popupZoomImage.alt = data.alt;
+    popupZoomImage.src = link;
+    popupZoomImage.alt = name;
     const popupZoomTitle = document.querySelector('.popup__zoom-title');
-    popupZoomTitle.textContent = data.name;
+    popupZoomTitle.textContent = name;
   }
 }
-
-
 
 
