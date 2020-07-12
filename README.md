@@ -1,5 +1,5 @@
 # Проект: Место
-https://elena-13-09.github.io/mesto/dist/index.html
+[Ссылка на проект](https://elena-13-09.github.io/mesto/dist/index.html)
 
 #### Учебный проект, выполненный на курсе "Вэб-разработчик" от "Яндекс.Практикум"
 
