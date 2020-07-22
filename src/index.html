@@ -15,13 +15,16 @@
 
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src="./images/Jacques-Yves-Cousteau.jpg" alt="Жак-Ив Кусто. Иллюстрация">
+        <div class="profile__avatar-cell">
+          <img class="profile__avatar" alt="Аватарка">
+          <div class="profile__avatar-edit"></div>
+        </div>
         <div class="profile__info">
           <div class="profile__cell">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <h1 class="profile__name"></h1>
             <button class="profile__edit-button" type="button"></button>
           </div>
-          <p class="profile__profession">Исследователь океана</p>
+          <p class="profile__profession"></p>
         </div>
         <button class="profile__add-button" type="button"></button>
       </section>
@@ -60,7 +63,28 @@
             placeholder="Ссылка на картинку" required>
           <span class="form__input-error" id="link-input-error"></span>
         </fieldset>
-        <button class="button__submit button__submit_image" type="submit">Создать</button>
+        <button class="button__submit button__submit_image" type="submit">Сохранить</button>
+      </form>
+    </section>
+
+    <section class="popup popup_avatar">
+      <form class="form__container form__container_avatar" name="form-avatar" novalidate>
+        <button class="button__close button__close_avatar" type="button"></button>
+        <h3 class="form__title form__title_avatar">Обновить аватар</h3>
+        <fieldset class="form__field">
+          <input class="form__input form__input_link-avatar" name="link" id="link-input" type="url" value=""
+            placeholder="Ссылка на картинку" required>
+          <span class="form__input-error" id="link-input-error"></span>
+        </fieldset>
+        <button class="button__submit button__submit_avatar" type="submit">Создать</button>
+      </form>
+    </section>
+
+    <section class="popup popup_confirm">
+      <form class="form__container form__container_confirm" name="form-confirm" novalidate>
+        <button class="button__close button__close_confirm" type="button"></button>
+        <h3 class="form__title form__title_confirm">Вы уверены?</h3>
+        <button class="button__submit button__submit_confirm" type="submit">Да</button>
       </form>
     </section>
 
@@ -77,7 +101,10 @@
         <img class="element__image">
         <div class="element__cell">
           <h3 class="element__title"></h3>
+          <div class="element__like-cell">
           <button class="element__like" type="button"></button>
+          <p class="element__like-number">0</p>
+          </div>
         </div>
         <button class="element__trash" type="button"></button>
       </div>

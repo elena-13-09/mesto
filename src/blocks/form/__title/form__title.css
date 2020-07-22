@@ -5,7 +5,7 @@
   line-height: 29px;
   color: #000000;
   margin-top: 34px;
-  margin-bottom: 54px;
+  margin-bottom: 30px;
   align-self: start;
   margin-left: 0;
 }
@@ -14,7 +14,6 @@
   .form__title {
     font-size: 18px;
     line-height: 22px;
-    margin-bottom: 36px;
     margin-top: 30px;
     max-width: 200px;
   }

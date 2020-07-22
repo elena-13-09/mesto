@@ -6,11 +6,11 @@ export default class Section {
   }
   //принимает DOM-элемент и добавляет его в контейнер
   addItem(element) {
-    this._container.prepend(element);
+    this._container.append(element);
   }
   //отрисовка карточек на странице
-  renderItems() {
-    this._renderedItems.forEach((item) => {
+  renderItems(item) {
+    item.forEach((item) => {
       //отрисовка  каждой отдельной карточки
       this._renderer(item);
     });
