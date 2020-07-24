@@ -17,11 +17,7 @@
   "bugs": {
     "url": "https://github.com/elena-13-09/mesto/issues"
   },
-<<<<<<< HEAD
-  "homepage": "https://github.com/elena-13-09/mesto/",
-=======
   "homepage": "https://elena-13-09.github.io/mesto/",
->>>>>>> 7fc2861da53c6194b4933f550b40c4d22de05991
   "devDependencies": {
     "@babel/core": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
