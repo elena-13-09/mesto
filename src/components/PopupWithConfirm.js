@@ -1,30 +1,34 @@
 import Popup from './Popup.js';
 
 export default class PopupWithConfirm extends Popup {
-  constructor({ popupSelector, formSubmit }) {
+  constructor(popupSelector) {
     super(popupSelector);
     this._popupSelector = document.querySelector(popupSelector);
-    this._formSubmit = formSubmit;
-    this.PopupWithConfirm = this.PopupWithConfirm.bind(this);
+    this._popupWithConfirm = this._popupWithConfirm.bind(this);
   }
 
-  //обработчик сабмита удаление карточки
-  PopupWithConfirm(evt) {
+  handleSubmit(deleteCard) {
+    this._formSubmit = deleteCard;
+  }
+
+  setEventListeners() {
+    super.setEventListeners();
+  }
+
+  //обработчик сабмита удаления карточки
+  _popupWithConfirm(evt) {
     evt.preventDefault();
-    this._formSubmit(this._element, this._id);
-    super.close();
+    this._formSubmit();
   }
 
-  open(id, deleteCard) {
+  open() {
     super.open();
-    this._element = deleteCard;
-    this._id = id;
-    this._popupSelector.addEventListener('submit', this.PopupWithConfirm);
+    this._popupSelector.addEventListener('submit', this._popupWithConfirm);
   }
 
   close() {
     super.close();
-    this._popupSelector.removeEventListener('submit', this.PopupWithConfirm);
+    this._popupSelector.removeEventListener('submit', this._popupWithConfirm);
   }
 }
 
